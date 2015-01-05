@@ -1,0 +1,32 @@
+apply plugin: 'eclipse'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+	
+repositories{ 
+	maven{ url "http://kvit-nexus:8081/nexus/content/groups/public" }
+}
+
+dependencies {
+	runtime 'org.apache.logging.log4j:log4j-core:2.1'
+	compile 'org.apache.logging.log4j:log4j-api:2.1'
+	compile 'org.apache.logging.log4j:log4j-slf4j-impl:2.1'
+
+	compile 'org.apache.commons:commons-lang3:3.3+'
+
+	testCompile 'junit:junit:4.11'
+	testCompile 'org.mockito:mockito-all:1.9.5'
+	testCompile 'org.easytesting:fest-assert-core:2.0M10'
+}
+
+	
+tasks.withType(JavaCompile) { 
+	options.encoding = 'UTF-8' 
+}
+
+tasks.withType(GroovyCompile) { 
+	options.encoding = 'UTF-8' 
+}
+
+	
+
