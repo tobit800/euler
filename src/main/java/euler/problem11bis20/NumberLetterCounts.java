@@ -2,8 +2,6 @@ package euler.problem11bis20;
 
 import static java.text.MessageFormat.format;
 
-import java.util.stream.IntStream;
-
 // Problem 17
 public class NumberLetterCounts
 {
@@ -11,28 +9,36 @@ public class NumberLetterCounts
 	public static void main(String[] args)
 	{
 		final NumberLetterCounts calc = new NumberLetterCounts();
-		for (int i = 1; i <= 1000; i++)
-		{
-			System.out.println(i + ": " + calc.toEnglish(i));
-		}
 		final long numberOfLetters = calc.countAllLetters(1000);
 		System.out.println("Anzahl der Buchstaben=" + numberOfLetters);
 	}
 
 	private int countAllLetters(int max)
 	{
-		return IntStream.rangeClosed(1, max)
-						.map(number -> countEnglishLetters(number))
-						.sum();
+		//		return IntStream.rangeClosed(1, max)
+//						.map(number -> countEnglishLetters(number))
+//						.sum();
+		int summe = 0;
+		for (int i = 1; i <= max; i++)
+		{
+			summe += countEnglishLetters(i);
+		}
+		return summe;
 	}
 
 	private int countEnglishLetters(int number)
 	{
-		final String english = toEnglish(number).replaceAll("[ -]", "");
-		final int length = english.length();
-		System.out.println(format("{0}: {1} ({2})", number, english, length));
-		return length;
+		final String english = toEnglish(number);
+//		System.out.println(format("{0}: {1} ({2})", number, english, english.length()));
+		final String englishShort = english.replaceAll("[ -]", "");
+		System.out.println(format("{0}: {1} ({2})", number, englishShort, englishShort.length()));
+		return englishShort.length();
 	}
+
+	//  21148
+	//-    24
+	//= 21124
+	// 1*24 = 12*2 = 8*3 = 6*4
 
 	private String toEnglish(int number)
 	{

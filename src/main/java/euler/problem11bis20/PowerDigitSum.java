@@ -2,6 +2,8 @@ package euler.problem11bis20;
 
 import java.math.BigInteger;
 
+import utils.DigitSum;
+
 // Problem 16
 public class PowerDigitSum
 {
@@ -17,12 +19,9 @@ public class PowerDigitSum
 		}
 		System.out.println("Power=" + power);
 
-		final int summe = power.toString()
-							   .chars()
-							   .parallel()
-							   .map(c -> c - 48)
-							   .sum();
+		final int summe = DigitSum.digitSum(power);
 
 		System.out.println("Summe=" + summe);
 	}
+
 }
