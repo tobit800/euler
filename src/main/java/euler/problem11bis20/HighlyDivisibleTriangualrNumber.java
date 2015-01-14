@@ -2,6 +2,8 @@ package euler.problem11bis20;
 
 import java.util.stream.LongStream;
 
+import utils.GeometrischeReihe;
+
 public class HighlyDivisibleTriangualrNumber
 {
 	public static void main(String[] args)

@@ -1,4 +1,4 @@
-package euler.problem11bis20;
+package utils;
 
 import java.util.function.LongSupplier;
 import java.util.stream.LongStream;
