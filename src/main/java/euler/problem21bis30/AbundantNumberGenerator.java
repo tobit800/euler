@@ -17,6 +17,11 @@ public class AbundantNumberGenerator implements LongSupplier
 						 .limit(max);
 	}
 
+	public long[] getAsArray(long max)
+	{
+		return asStream(max).toArray();
+	}
+
 	@Override
 	public long getAsLong()
 	{
@@ -32,7 +37,7 @@ public class AbundantNumberGenerator implements LongSupplier
 
 	private boolean isAbundant(long number)
 	{
-		return number < faktoren.summe(number);
+		return number < faktoren.summe((int) number);
 	}
 
 }

@@ -5,47 +5,45 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.LongStream;
 
-import utils.ProgressUtil;
-
 // Problem 23
 public class NonAbundantSums
 {
-	private static final long MAX = 28123L;
-	private static long[] abundant;
-	private static Set<Long> abundantSet;
+	private long[] abundant;
+	private Set<Long> abundantSet;
 
-	public static void main(String[] args)
+	private long calculate(long max)
 	{
-		ProgressUtil.start();
-		System.out.println("Berechne Abundant-Zahlen...");
-		abundant = new AbundantNumberGenerator().asStream(MAX)
-												.toArray();
-
+		abundant = new AbundantNumberGenerator().getAsArray(max);
 		abundantSet = new TreeSet<Long>();
-		for (final long zahl : abundant)
+		for (final long number : abundant)
 		{
-			abundantSet.add(zahl);
+			abundantSet.add(number);
 		}
-		System.out.println("Abundant-Zahlen berechnet.");
+		long start = System.currentTimeMillis();
+		long sum = LongStream.range(1, max)
+							 .filter(z -> !isSum(z))
+							 .sum();
 
-		final long summe = LongStream.range(1, MAX)
-									 .filter(z -> !istZerlegbar(z))
-									 .parallel()
-									 .sum();
-		System.out.println("Summe = " + summe);
-		ProgressUtil.stop();
-
+		long delta = System.currentTimeMillis() - start;
+		System.out.println("Used " + delta + " ms.");
+		return sum;
 	}
 
-	private static boolean istZerlegbar(long zahl)
+	private boolean isSum(long zahl)
 	{
 		return Arrays.stream(abundant)
 					 .limit(zahl)
-					 .anyMatch(z -> istSumme(zahl, z));
+					 .parallel()
+					 .anyMatch(z -> hasSummand(zahl, z));
 	}
 
-	private static boolean istSumme(long zahl, long z)
+	private boolean hasSummand(long sum, long summand)
 	{
-		return abundantSet.contains(zahl - z);
+		return abundantSet.contains(sum - summand);
+	}
+
+	public static void main(String[] args)
+	{
+		System.out.println("Summe = " + new NonAbundantSums().calculate(28123L));
 	}
 }

@@ -49,12 +49,9 @@ public class FaktorenZerlegungTest
 	@Test
 	public void produktVonPrimzahlen() throws Exception
 	{
-		long[] primzahlen = { 523L, 1979, 2731, 3559, 5273 };
-		long summe = 1;
-		for (long prim : primzahlen)
-		{
-			summe += prim;
-		}
+		long[] primzahlen = { 523, 1979, 2731 };
+		long summe = 1 + 523 + 1979 + 2731 + 523 * 1979 + 523 * 2731 + 1979 * 2731;
+
 		long produkt = 1;
 		for (long prim : primzahlen)
 		{
