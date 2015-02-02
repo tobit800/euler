@@ -3,14 +3,88 @@ package euler.problem21bis30;
 // Problem 24
 public class LexigraphicPermutations
 {
+//	int[] num = { 0, 1, 2, 5, 3, 3, 0 };
 	int[] num = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	int n = num.length;
 
 	public static void main(String[] args)
 	{
 		new LexigraphicPermutations().calc();
+	}
+
+	private void calc()
+	{
+		int counter = 1;
+		while (counter < 1000000)
+		{
+			final int pivot = pivot();
+			final int successor = successor(pivot);
+			swap(pivot, successor);
+			reverse(pivot + 1);
+			counter++;
+		}
+		print();
 
 	}
 
+	void print()
+	{
+		for (int i = 0; i < n; i++)
+		{
+			System.out.print(num[i]);
+		}
+		System.out.println("");
+	}
+
+	private void reverse(int from)
+	{
+		final int k = n - from;
+		final int[] rev = new int[k];
+		for (int i = 0; i < k; i++)
+		{
+			rev[i] = num[n - i - 1];
+		}
+		for (int i = 0; i < k; i++)
+		{
+			num[from + i] = rev[i];
+		}
+//		System.out.println(num);
+	}
+
+	private int pivot()
+	{
+		for (int i = n - 1; i > 0; i--)
+		{
+			if (num[i - 1] < num[i])
+			{
+//				System.out.println("pivot = " + num[i - 1]);
+				return i - 1;
+			}
+		}
+		return 0;
+	}
+
+	private int successor(int pivot)
+	{
+		for (int i = n - 1; i > pivot; i--)
+		{
+			if (num[i] > num[pivot])
+			{
+//				System.out.println("successor = " + num[i]);
+				return i;
+			}
+		}
+		return 0;
+	}
+
+	private void swap(int i, int j)
+	{
+		final int k = num[i];
+		num[i] = num[j];
+		num[j] = k;
+	}
+
+	/*
 	private void calc()
 	{
 		int counter = 0;
@@ -73,7 +147,7 @@ public class LexigraphicPermutations
 																					&& i9 != i8)
 																				{
 																					counter++;
-																					String number =
+																					final String number =
 																						""
 																							+ num[i1]
 																							+ num[i2]
@@ -84,7 +158,8 @@ public class LexigraphicPermutations
 																							+ num[i7]
 																							+ num[i8]
 																							+ num[i9];
-																					if (number.equals("2783915460"))
+																					//number.equals("2783915460")
+																					if (counter == 1000000 - 1)
 																					{
 																						System.out.println(counter
 																							+ ":"
@@ -116,5 +191,5 @@ public class LexigraphicPermutations
 				}
 			}
 		}
-	}
+	}*/
 }
