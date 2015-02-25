@@ -29,7 +29,7 @@ public class Primezahlanzeige
 	private void ergänzeNächstePrimzahl()
 	{
 		long kandidat = größtePrimzahl() + 1;
-		while (!isPrime(kandidat))
+		while (!isNotPrime(kandidat))
 		{
 			kandidat++;
 		}
@@ -49,7 +49,7 @@ public class Primezahlanzeige
 		return primzahlen.get(primzahlen.size() - 1);
 	}
 
-	private boolean isPrime(long candidate)
+	private boolean isNotPrime(long candidate)
 	{
 		for (final Long prim : primzahlen)
 		{
@@ -59,6 +59,18 @@ public class Primezahlanzeige
 			}
 		}
 		return true;
+	}
+
+	private boolean isPrime(long candidate)
+	{
+		for (final Long prim : primzahlen)
+		{
+			if (candidate % prim == 0)
+			{
+				return false;
+			}
+		}
+		return false;
 	}
 
 }

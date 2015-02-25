@@ -23,7 +23,7 @@ public class PrimzahlenGeneratorTest
 	@Test
 	public void primBis() throws Exception
 	{
-		sut.bis(10)
+		sut.bis(1000)
 		   .forEach(System.out::println);
 	}
 
