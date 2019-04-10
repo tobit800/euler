@@ -2,9 +2,9 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
-	
-repositories{ 
-	maven{ url "http://kvit-nexus:8081/nexus/content/groups/public" }
+
+repositories{
+    jcenter()
 }
 
 dependencies {
@@ -19,14 +19,14 @@ dependencies {
 	testCompile 'org.easytesting:fest-assert-core:2.0M10'
 }
 
-	
-tasks.withType(JavaCompile) { 
-	options.encoding = 'UTF-8' 
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
 }
 
-tasks.withType(GroovyCompile) { 
-	options.encoding = 'UTF-8' 
+tasks.withType(GroovyCompile) {
+	options.encoding = 'UTF-8'
 }
 
-	
+
 
